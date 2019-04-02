@@ -7,9 +7,15 @@
 }
 
 .boton-usuario {
-
+    background-color: aquamarine;
+    size: 5rem;
+    margin: 2rem;
+    border: 0;
+    font: helvetica;
+    font-size: 2rem;
 }
 
 .post {
-
+    font-size: 2rem;
+    margin: 45px;
 }
