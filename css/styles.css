@@ -1,21 +1,92 @@
 .contenedor-botones-usuario {
-	
+    margin: 5%;
 }
 
 .contenedor-lista-posts {
-	
+    margin: 10%;
+    margin-left: 5%;
 }
 
 .boton-usuario {
     background-color: aquamarine;
+    padding: 5%;
     size: 5rem;
     margin: 2rem;
     border: 0;
-    font: helvetica;
-    font-size: 2rem;
+    font-family: helvetica;
+    font-size: 2.2rem;
+}
+
+.boton-usuario {
+    -webkit-transition: background-color 0.8s ease-out;
+    -moz-transition: background-color 0.8s ease-out;
+    -o-transition: background-color 0.8s ease-out;
+    -ms-transition: background-color 0.8s ease-out;
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    -ms-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out, background-color 0.8s ease-out;
+}
+
+.boton-usuario:active {
+    transform: translateY(2px);
+}
+
+.boton-usuario:hover {
+    background-color: cadetblue;
+    color: blanchedalmond;
 }
 
 .post {
+    margin: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titulo-post {
     font-size: 2rem;
-    margin: 45px;
+}
+
+.texto-post {
+    margin: 60px;
+    margin-left: 0px;
+    color: darkslateblue;
+    font-size: 1rem;
+}
+
+.expandable {
+    background: #fff;
+    overflow: hidden;
+    color: #000;
+    line-height: 50px;
+    transition: all .5s ease-in-out;
+    height: 0;
+}
+
+.expandable:target {
+    height: 250px;
+}
+
+.boton-comentarios {
+    color: darkgray;
+    margin: 40px;
+    margin-left: 0px;
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    -ms-transition: color 0.3s ease-out;
+    /*-webkit-transition: background-color 0.3s ease-out;
+    -moz-transition: background-color 0.3s ease-out;
+    -o-transition: background-color 0.3s ease-out;
+    -ms-transition: background-color 0.3s ease-out;
+    */
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+}
+
+.boton-comentarios:active {
+    transform: translateY(2px);
+}
+
+.boton-comentarios:hover {
+    color: rgb(75, 75, 75);
 }

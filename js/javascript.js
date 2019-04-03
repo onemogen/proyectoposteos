@@ -101,8 +101,6 @@ function normalizarListaUsuarios(arrayLista) {
 }
 
 
-
-
 /**
  * Recibe array original de lista de posts según usuario y devuelve uno nuevo con la estructura de objeto que necesitamos
  *
@@ -119,6 +117,31 @@ function normalizarListaPosts(arrayLista) {
         nuevoArray.push({
             id: arrayLista[i].id,
             titulo: arrayLista[i].title,
+            contenido: arrayLista[i].body
+        });
+    }
+    return nuevoArray;
+}
+
+
+/**
+ * Recibe array original de lista de comentarios según posts y devuelve uno nuevo con la estructura de objeto que necesitamos
+ *
+ * @param arrayLista           lista de comentarios de posts (Array de objetos)
+ *              
+ */
+
+function normalizarListaComentarios(arrayLista) {
+
+    nuevoArray = [];
+
+    for (i = 0; i < arrayLista.length; i++) {
+
+        nuevoArray.push({
+            idPost: arrayLista[i].postId,
+            id: arrayLista[i].id,
+            nombre: arrayLista[i],
+            email: arrayLista[i].email,
             contenido: arrayLista[i].body
         });
     }
@@ -215,17 +238,36 @@ function mostrarPostsUsuario(arr) {
         // se asigna clase    
         divPost.setAttribute("class", "post");
 
+
         //se asigna título 
         if (listaPosts[0].titulo != undefined && listaPosts[0].titulo != "") {
-            divPost.appendChild(document.createTextNode(listaPosts[i].titulo));
+
+            let tituloPost = document.createElement("a");
+            tituloPost.setAttribute("href", "#slider" + listaPosts[i].id);
+            tituloPost.innerHTML = listaPosts[i].titulo;
+            tituloPost.setAttribute("class", "titulo-post");
+            tituloPost.style.textDecoration = "none";
+            tituloPost.style.color = "inherit";
+            divPost.appendChild(tituloPost);
         };
 
         // se asigna el contenido del post
         let textoPost = document.createElement("p");
-        textoPost.setAttribute("class", "post");
+        textoPost.className = "expandable texto-post";
+        textoPost.setAttribute("id", "slider" + listaPosts[i].id);
         textoPost.innerHTML = listaPosts[i].contenido;
-        divPost.appendChild(textoPost);
 
+        // se asigna "botón" para abrir comentarios
+        let botonComentarios = document.createElement("span");
+        botonComentarios.innerHTML = "Ver Comentarios";
+        botonComentarios.style.display = "block";
+        botonComentarios.setAttribute("class", "boton-comentarios");
+        botonComentarios.addEventListener('click', function () {
+            consultarComentariosPosts();
+        })
+
+        textoPost.appendChild(botonComentarios);
+        divPost.appendChild(textoPost);
 
         // se agrega el div del post al div contenedor
         divContenedorListaPosts.appendChild(divPost);
@@ -234,49 +276,29 @@ function mostrarPostsUsuario(arr) {
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------
-
-/*
 
 /**
- * Consulta y muestra los posts creados por el usuario indicado
- *
- * @param idUsuario        id del usuario (number)
- *
+ * muestra comentarios referidos a los posteos de los autores
+ * 
+ * @param {arr}
  */
-function verPostsUsuario(idUsuario) {
 
-    // Se definen variables para guardar referencias a los divs contenedores que ya están creados
-    var divContenedorBotonesUsuario = document.getElementById("div-contenedor-botones-usuario");
-    var divContenedorListaPosts = document.getElementById("div-contenedor-lista-posts");
+let mostrarComentarios = function (arr) {
 
-    // Se vacía el div de posts por si hay elementos previos.
-    divContenedorListaPosts.innerHTML = "";
+    let divComentarios = document.getElementById("div-contenedor-lista-comentarios");
 
-    // Se crea variable para guardar el array de posts, se llena con la función de consulta
-    var listaPosts = consultarListaPostsUsuario(idUsuario);
+    divComentarios.innerHTML = "";
 
-    // Se recorre el array de posts y para cada uno se crea el elemento en pantalla
-    for (var i = 0; i < listaPosts.length; i++) {
+    listaComentarios = arr;
 
-        //se crea el div de los posts
-        let divPost = document.createElement("div");
-        // se asigna clase    
-        divPost.setAttribute("class", "post");
+    for (i = 0; i < listaComentarios.length; i++) {
 
-        //se asigna título 
-        if (listaPosts[0].titulo != undefined && listaPosts[0].titulo != "") {
-            divPost.appendChild(document.createTextNode(listaPosts[i].titulo));
-        };
 
-        // se asigna el contenido del post
-        let textoPost = document.createElement("p");
-        textoPost.setAttribute("class", "post");
-        textoPost.innerHTML = listaPosts[i].contenido;
-        divPost.appendChild(textoPost);
-        
-        // se agrega el div del post al div contenedor
-        divContenedorListaPosts.appendChild(divPost);
+
+
     }
 
-}
+
+
+
+ }

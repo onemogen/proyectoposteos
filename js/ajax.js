@@ -86,3 +86,47 @@ function consultarUsuarios(cbFuncOK, cbFuncError) {
     request.send();
 
 }
+
+
+
+
+
+/**
+ * realiza pedido de información (lista de comentarios segun posts)
+ *
+ * @param cbFuncOK                   ejecuta el código (función)
+ * @param cbFuncError                muestra un error  (función)
+ *                 
+ */
+
+function consultarComentariosPosts(idPost, cbFuncOK, cbFuncError) {
+
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+
+                //salva el parse del resultado de traer los datos en una var.
+                let arrayComentarios = JSON.parse(this.responseText);
+
+                console.log("testeo: ", arrayComentarios);
+
+                //chequea que tenga información
+                if (arrayComentarios != undefined && arrayComentarios.length > 0) {
+
+                    //ejecuta código de dibuja la web
+                    cbFuncOK();
+                } else {
+                    cbFuncError();
+                }
+            }
+        }
+    }
+
+    request.open("GET", "https://jsonplaceholder.typicode.com/comments?postId=" + idPost);
+    request.send();
+
+}
+
