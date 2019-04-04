@@ -173,6 +173,17 @@ function sinDatosPostsError() {
     console.log("No se recibieron datos de posts")
 }
 
+/**
+ *  
+ * avisa error de datos incompletos
+ *   
+ */
+
+function sinDatosComentariosError() {
+    console.log("No se recibieron datos de posts")
+}
+
+
 
 
 
@@ -261,18 +272,16 @@ function mostrarPostsUsuario(arr) {
         let botonComentarios = document.createElement("span");
         botonComentarios.innerHTML = "Ver Comentarios";
         botonComentarios.style.display = "block";
-        botonComentarios.setAttribute("class", "boton-comentarios");
-        botonComentarios.addEventListener('click', function () {
-            consultarComentariosPosts();
-        })
-
+        botonComentarios.setAttribute("class", "boton-comentarios"); 
+        botonComentarios.addEventListener("click", function () {
+            consultarComentariosPosts(listaPosts[i].id, mostrarComentarios, sinDatosComentariosError);
+        });
+        
+        // se agregan los divs correspondientemente
         textoPost.appendChild(botonComentarios);
         divPost.appendChild(textoPost);
-
-        // se agrega el div del post al div contenedor
         divContenedorListaPosts.appendChild(divPost);
     }
-
 }
 
 
@@ -280,25 +289,34 @@ function mostrarPostsUsuario(arr) {
 /**
  * muestra comentarios referidos a los posteos de los autores
  * 
- * @param {arr}
+ * @param {arr2}
  */
 
-let mostrarComentarios = function (arr) {
+let mostrarComentarios = function (arr2) {
 
-    let divComentarios = document.getElementById("div-contenedor-lista-comentarios");
+    let divContenedorListaComentarios = document.getElementById("div-contenedor-lista-comentarios");
 
-    divComentarios.innerHTML = "";
+    divContenedorListaComentarios.innerHTML = "";
 
-    listaComentarios = arr;
+    let listaComentarios = arr2;
+
+    console.log(listaComentarios);
 
     for (i = 0; i < listaComentarios.length; i++) {
 
+        let divComentario = document.createElement("div");
+        divComentario.setAttribute("class", "expandable comentarios-post");
 
+        let textoComentario = document.createElement("p");
+        textoComentario.innerHTML =
+        `
+        Nombre: ${listaComentarios[i].nombre}
+        Email: ${listaComentarios[i].email}
+        <<${listaComentarios[i].contenido}>>
+        `;
 
+        divComentario.appendChild(textoComentario);
 
+        divContenedorListaComentarios.appendChild(divComentario);
     }
-
-
-
-
- }
+}

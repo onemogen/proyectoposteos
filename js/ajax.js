@@ -93,7 +93,8 @@ function consultarUsuarios(cbFuncOK, cbFuncError) {
 
 /**
  * realiza pedido de información (lista de comentarios segun posts)
- *
+ * 
+ * @param idPost                  id que comentarios según (número)
  * @param cbFuncOK                   ejecuta el código (función)
  * @param cbFuncError                muestra un error  (función)
  *                 
@@ -113,11 +114,15 @@ function consultarComentariosPosts(idPost, cbFuncOK, cbFuncError) {
 
                 console.log("testeo: ", arrayComentarios);
 
+                arrayComentarios =  normalizarListaComentarios(arrayComentarios);
+
+                console.log("testeo 2", arrayComentarios);
+
                 //chequea que tenga información
                 if (arrayComentarios != undefined && arrayComentarios.length > 0) {
 
                     //ejecuta código de dibuja la web
-                    cbFuncOK();
+                    cbFuncOK(arrayComentarios);
                 } else {
                     cbFuncError();
                 }
