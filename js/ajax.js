@@ -112,11 +112,11 @@ function consultarComentariosPosts(idPost, cbFuncOK, cbFuncError) {
                 //salva el parse del resultado de traer los datos en una var.
                 let arrayComentarios = JSON.parse(this.responseText);
 
-                console.log("testeo: ", arrayComentarios);
+                console.log("testeo coment1: ", arrayComentarios);
 
                 arrayComentarios =  normalizarListaComentarios(arrayComentarios);
 
-                console.log("testeo 2", arrayComentarios);
+                console.log("testeo coment2", arrayComentarios);
 
                 //chequea que tenga información
                 if (arrayComentarios != undefined && arrayComentarios.length > 0) {

@@ -5,6 +5,7 @@
 .contenedor-lista-posts {
     margin: 10%;
     margin-left: 5%;
+    
 }
 
 .boton-usuario {
@@ -39,8 +40,9 @@
 }
 
 .post {
-    margin: 50px;
+    /*margin: 50px;*/
     font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
 }
 
 .titulo-post {
@@ -104,6 +106,19 @@
 }
 
 
+.contenedor-lista-comentarios {
+
+}
+
+
+.comentarios-post {
+    height: 100%;
+}
+
+
+.texto-comentarios {
+
+}
 /*
 .texto-post: :active {
     animation-duration: 3s;

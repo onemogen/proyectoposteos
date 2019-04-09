@@ -242,7 +242,7 @@ function mostrarPostsUsuario(arr) {
     console.log(listaPosts);
 
     // Se recorre el array de posts y para cada uno se crea el elemento en pantalla
-    for (var i = 0; i < listaPosts.length; i++) {
+    for (let i = 0; i < listaPosts.length; i++) {
 
         //se crea el div de los posts
         let divPost = document.createElement("div");
@@ -274,6 +274,7 @@ function mostrarPostsUsuario(arr) {
         botonComentarios.style.display = "block";
         botonComentarios.setAttribute("class", "boton-comentarios"); 
         botonComentarios.addEventListener("click", function () {
+            console.log("prueba comentarios boton ", listaPosts[i].id);
             consultarComentariosPosts(listaPosts[i].id, mostrarComentarios, sinDatosComentariosError);
         });
         
@@ -292,9 +293,15 @@ function mostrarPostsUsuario(arr) {
  * @param {arr2}
  */
 
-let mostrarComentarios = function (arr2) {
+function mostrarComentarios (arr2) {
+
+    console.log("testeo3: "+ arr2)
+
+   
 
     let divContenedorListaComentarios = document.getElementById("div-contenedor-lista-comentarios");
+
+    let divContenedorListaPosts = document.getElementById("div-contenedor-lista-posts");
 
     divContenedorListaComentarios.innerHTML = "";
 
@@ -302,21 +309,25 @@ let mostrarComentarios = function (arr2) {
 
     console.log(listaComentarios);
 
-    for (i = 0; i < listaComentarios.length; i++) {
+    for (let i = 0; i < listaComentarios.length; i++) {
 
         let divComentario = document.createElement("div");
-        divComentario.setAttribute("class", "expandable comentarios-post");
+        divComentario.setAttribute("class", "comentarios-post");
 
         let textoComentario = document.createElement("p");
+        textoComentario.setAttribute("class", "texto-comentario" )
         textoComentario.innerHTML =
         `
         Nombre: ${listaComentarios[i].nombre}
         Email: ${listaComentarios[i].email}
-        <<${listaComentarios[i].contenido}>>
+        Dijo: ${listaComentarios[i].contenido}
         `;
 
         divComentario.appendChild(textoComentario);
 
         divContenedorListaComentarios.appendChild(divComentario);
+
+        divContenedorListaPosts.appendChild(divContenedorListaComentarios);
     }
+    
 }
