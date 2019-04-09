@@ -7,41 +7,6 @@ consultarUsuarios(mostrarBotones, sinDatosUsuariosError);
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-
-
-//-------COMENTARIOS GENERALES-----------------------------------------------------------------------------------------------------------------
-
-
-/*
-
-
-Las funciones que se definen son:
-
-- (nueva) normalizarListaUsuarios(arrayLista): Recibe array original de lista de usuarios y devuelve uno nuevo con la estructura de objeto que necesitamos
-
-- (nueva) mostrarBotones(arr, cbFunc): recibe un array de usuarios y agrega botones correspondientes
-
-- (nueva) consultarUsuarios(cbFuncOK, cbFuncError): realiza pedido de información (lista de usuarios/autores)
-
-- agregarBoton(nombre, id): Agrega un botón para acceder a los posts del usuario indicado
-
-
-- (nueva) sinDatosError (): avisa sobre falta de datos, en consola
-
-- verPostsUsuario(idUsuario): Consulta y muestra los posts creados por el usuario indicado
-
-- consultarListaPostsUsuario(idUsuario): Consulta y devuelve la lista de posts para un usuario
-
-*/
-
-
-
-
-
-
-
-
-
 //-------DECLARACIÓN DE FUNCIONES------------------------------------------------------------------------------------------------------------
 
 
@@ -130,7 +95,6 @@ function normalizarListaPosts(arrayLista) {
  * @param arrayLista           lista de comentarios de posts (Array de objetos)
  *              
  */
-
 function normalizarListaComentarios(arrayLista) {
 
     nuevoArray = [];
@@ -140,9 +104,10 @@ function normalizarListaComentarios(arrayLista) {
         nuevoArray.push({
             idPost: arrayLista[i].postId,
             id: arrayLista[i].id,
-            nombre: arrayLista[i],
+            nombre: arrayLista[i].name,
             email: arrayLista[i].email,
             contenido: arrayLista[i].body
+
         });
     }
     return nuevoArray;
@@ -241,6 +206,12 @@ function mostrarPostsUsuario(arr) {
 
     console.log(listaPosts);
 
+    //se crea título para el apartado de posteos
+    var tituloDivPosteos = document.createElement("h1");
+    tituloDivPosteos.setAttribute("class", "titulo titulo-posts");
+    tituloDivPosteos.appendChild(document.createTextNode("Artículos"));
+    divContenedorListaPosts.appendChild(tituloDivPosteos);
+
     // Se recorre el array de posts y para cada uno se crea el elemento en pantalla
     for (let i = 0; i < listaPosts.length; i++) {
 
@@ -272,12 +243,12 @@ function mostrarPostsUsuario(arr) {
         let botonComentarios = document.createElement("span");
         botonComentarios.innerHTML = "Ver Comentarios";
         botonComentarios.style.display = "block";
-        botonComentarios.setAttribute("class", "boton-comentarios"); 
+        botonComentarios.setAttribute("class", "boton-comentarios");
         botonComentarios.addEventListener("click", function () {
             console.log("prueba comentarios boton ", listaPosts[i].id);
             consultarComentariosPosts(listaPosts[i].id, mostrarComentarios, sinDatosComentariosError);
         });
-        
+
         // se agregan los divs correspondientemente
         textoPost.appendChild(botonComentarios);
         divPost.appendChild(textoPost);
@@ -290,44 +261,56 @@ function mostrarPostsUsuario(arr) {
 /**
  * muestra comentarios referidos a los posteos de los autores
  * 
- * @param {arr2}
+ * @param arr2           array de comentarios según post
  */
 
-function mostrarComentarios (arr2) {
+function mostrarComentarios(arr2) {
 
-    console.log("testeo3: "+ arr2)
-
-   
-
-    let divContenedorListaComentarios = document.getElementById("div-contenedor-lista-comentarios");
-
-    let divContenedorListaPosts = document.getElementById("div-contenedor-lista-posts");
-
-    divContenedorListaComentarios.innerHTML = "";
-
+    console.log("testeo3: " + arr2);
+    // variable auxiliar que recibe parse de los comentarios
     let listaComentarios = arr2;
 
     console.log(listaComentarios);
 
+
+    // div a utilizar
+    let divContenedorListaComentarios = document.getElementById("div-contenedor-lista-comentarios");
+    // vacío contenido div
+    divContenedorListaComentarios.innerHTML = "";
+    //crea titulo de la sección
+    var tituloDivComentarios = document.createElement("h1");
+    tituloDivComentarios.setAttribute("class", "titulo titulo-comentarios");
+    tituloDivComentarios.appendChild(document.createTextNode("Comentarios"));
+    divContenedorListaComentarios.appendChild(tituloDivComentarios);
+
+    // loop que crea html de todos los comentarios correspondientes al post
     for (let i = 0; i < listaComentarios.length; i++) {
 
+        //se crean los divs de cada comentario
         let divComentario = document.createElement("div");
         divComentario.setAttribute("class", "comentarios-post");
-
+        
+        // se crea el contenido
         let textoComentario = document.createElement("p");
-        textoComentario.setAttribute("class", "texto-comentario" )
-        textoComentario.innerHTML =
-        `
-        Nombre: ${listaComentarios[i].nombre}
-        Email: ${listaComentarios[i].email}
-        Dijo: ${listaComentarios[i].contenido}
-        `;
+        textoComentario.setAttribute("class", "texto-comentario")
+        
+        let nombreUsuarioComentario = document.createElement("p");
+        let emailUsuarioComentario = document.createElement("p");
+        let contenidoComentario = document.createElement("p");
 
+        nombreUsuarioComentario.innerHTML = `Nombre: ${listaComentarios[i].nombre}`
+        emailUsuarioComentario.innerHTML = `Email: ${listaComentarios[i].email}`
+        contenidoComentario.innerHTML = `Dijo: "${listaComentarios[i].contenido}"`
+
+        textoComentario.appendChild(nombreUsuarioComentario);
+        textoComentario.appendChild(emailUsuarioComentario);
+        textoComentario.appendChild(contenidoComentario);
+        
+        // se appendea al div contenedor
         divComentario.appendChild(textoComentario);
-
         divContenedorListaComentarios.appendChild(divComentario);
 
-        divContenedorListaPosts.appendChild(divContenedorListaComentarios);
+
     }
-    
+
 }

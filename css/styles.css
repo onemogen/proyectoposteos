@@ -1,3 +1,10 @@
+.titulo {
+    font-family: Helvetica, sans-serif;
+    font-size: 3rem;
+    margin: 80px;
+    margin-left: 0px;
+}
+
 .contenedor-botones-usuario {
     margin: 5%;
 }
@@ -8,14 +15,14 @@
     
 }
 
+
 .boton-usuario {
     background-color: aquamarine;
     padding: 5%;
-    size: 5rem;
     margin: 2rem;
     border: 0;
     font-family: helvetica;
-    font-size: 2.2rem;
+    font-size: 1.7rem;
 }
 
 .boton-usuario {
@@ -106,33 +113,22 @@
 }
 
 
-.contenedor-lista-comentarios {
-
-}
-
-
 .comentarios-post {
     height: 100%;
+    margin-left: 0px;
+    margin: 50px;
 }
 
 
-.texto-comentarios {
+.texto-comentario {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    margin-left: 0px;
+    margin: 20px;
 
 }
-/*
-.texto-post: :active {
-    animation-duration: 3s;
-    animation-name: slided;
-  }
-  
-  @keyframes slided {
-    from {
-      margin-top: 100%;
-      height: 300%
-    }
-  
-    to {
-      margin-top: 0%;
-      height: 100%;
-    }
-  }
+
+.contenedor-lista-comentarios {
+    margin: 10%;
+    margin-left: 5%;
+}
